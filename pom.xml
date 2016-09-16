@@ -127,9 +127,9 @@
       </properties>
     </profile>
     <profile>
-      <id>testhost</id>
+      <id>VirtShop</id>
       <properties>
-        <site.url>http://testhost/</site.url>
+        <site.url>http://qa-u1604.vlab.lohika.com:8080/</site.url>
       </properties>
     </profile>
     <profile>
@@ -149,9 +149,15 @@
       </activation>
     </profile>
     <profile>
-      <id>grid</id>
+      <id>Grid_localhost</id>
       <properties>
         <grid.url>http://localhost:4444/wd/hub/</grid.url>
+      </properties>
+    </profile>
+    <profile>
+      <id>Grid</id>
+      <properties>
+        <grid.url>http://qa-u1604.vlab.lohika.com:4444/wd/hub/</grid.url>
       </properties>
     </profile>
   </profiles>
