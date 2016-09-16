@@ -60,6 +60,45 @@
           <target>1.6</target>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.1.1</version>
+        <executions>
+          <execution>
+            <id>Run_Selenium_Hub</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <phase>initialize</phase>
+            <configuration>
+              <executable>${project.basedir}/env/Run_Selenium_Hub.bat</executable>
+              <workingDirectory>${project.basedir}/env/</workingDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.3.1</version>
+        <executions>
+          <execution>
+            <id>Run_Selenium_Hub</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <phase>none</phase>
+            <configuration>
+              <executable>cscript.exe</executable>
+              <arguments>
+                <argument>${project.basedir}/env/run.vbs </argument>
+              </arguments>
+              <workingDirectory>${project.basedir}/env/</workingDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
   <!-- profiles -->
@@ -159,6 +198,37 @@
       <properties>
         <grid.url>http://qa-u1604.vlab.lohika.com:4444/wd/hub/</grid.url>
       </properties>
+    </profile>
+    <profile>
+      <id>Grid_First_localhost_start</id>
+      <properties>
+        <grid.url>http://localhost:4444/wd/hub</grid.url>
+      </properties>
+      <build>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>1.3.1</version>
+          <executions>
+            <execution>
+              <id>Run_Selenium_Hub</id>
+              <goals>
+                <goal>exec</goal>
+              </goals>
+              <phase>initialize</phase>
+              <configuration>
+                <executable>cscript.exe</executable>
+                <arguments>
+                  <argument>${project.basedir}/env/run.vbs </argument>
+                </arguments>
+                <workingDirectory>${project.basedir}/env/</workingDirectory>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+      </build>
     </profile>
   </profiles>
 </project>
