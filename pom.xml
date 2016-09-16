@@ -60,6 +60,45 @@
           <target>1.6</target>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.3.1</version>
+        <executions>
+          <execution>
+            <id>Run_Selenium_Hub</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <phase>initialize</phase>
+            <configuration>
+              <executable>${project.basedir}/env/Run_Selenium_Hub.bat</executable>
+              <workingDirectory>${project.basedir}/env/</workingDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.3.1</version>
+        <executions>
+          <execution>
+            <id>Run_Selenium_Hub</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <phase>none</phase>
+            <configuration>
+              <executable>cscript.exe</executable>
+              <arguments>
+                <argument>${project.basedir}/env/run.vbs </argument>
+              </arguments>
+              <workingDirectory>${project.basedir}/env/</workingDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
   <!-- profiles -->
@@ -71,7 +110,7 @@
         <capabilities>/firefox.capabilities</capabilities>
       </properties>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
     </profile>
     <profile>
@@ -79,6 +118,10 @@
       <properties>
         <capabilities>/chrome.capabilities</capabilities>
       </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+
     </profile>
     <profile>
       <id>ie</id>
@@ -117,26 +160,17 @@
         <site.url>http://localhost/</site.url>
       </properties>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
     </profile>
     <profile>
-      <id>devhost</id>
+      <id>Our Wordpress site</id>
       <properties>
-        <site.url>http://devhost/</site.url>
+        <site.url>http://qa-u1604.vlab.lohika.com:8080/</site.url>
       </properties>
-    </profile>
-    <profile>
-      <id>testhost</id>
-      <properties>
-        <site.url>http://testhost/</site.url>
-      </properties>
-    </profile>
-    <profile>
-      <id>prodhost</id>
-      <properties>
-        <site.url>http://prodhost.com/</site.url>
-      </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
     </profile>
     <!-- grid -->
     <profile>
@@ -145,14 +179,56 @@
         <grid.url></grid.url>
       </properties>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
     </profile>
     <profile>
-      <id>grid</id>
+      <id>Grid in localhost</id>
       <properties>
         <grid.url>http://localhost:4444/wd/hub/</grid.url>
       </properties>
+    </profile>
+    <profile>
+      <id>Grid</id>
+      <properties>
+        <grid.url>http://qa-u1604.vlab.lohika.com:4444/wd/hub/</grid.url>
+      </properties>
+
+    </profile>
+    <profile>
+      <id>Grid in localhost. First start</id>
+      <properties>
+        <grid.url>http://localhost:4444/wd/hub</grid.url>
+      </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+
+      <build>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>1.3.1</version>
+          <executions>
+            <execution>
+              <id>Run_Selenium_Hub</id>
+              <goals>
+                <goal>exec</goal>
+              </goals>
+              <phase>initialize</phase>
+              <configuration>
+                <executable>cscript.exe</executable>
+                <arguments>
+                  <argument>${project.basedir}/env/run.vbs </argument>
+                </arguments>
+                <workingDirectory>${project.basedir}/env/</workingDirectory>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+      </build>
     </profile>
   </profiles>
 </project>
