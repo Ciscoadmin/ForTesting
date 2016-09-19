@@ -6,15 +6,15 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import ForTesting.pages.HomePage;
+import ForTesting.pages.ExamplePage;
 
-public class SampleTestNgTest extends TestNgTestBase {
+public class ExampleOfTest extends BaseTest {
 
-  private HomePage homepage;
+  private ExamplePage homepage;
 
   @BeforeMethod
   public void initPageObjects() {
-    homepage = PageFactory.initElements(driver, HomePage.class);
+    homepage = PageFactory.initElements(driver, ExamplePage.class);
   }
 
   @Test
